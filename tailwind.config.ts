@@ -8,7 +8,11 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        roboto: ["Roboto", "sans-serif"],
+      },
       colors: {
+        'gray-0': '#fafafa',  // Corrected to use the color code with a hash (#)
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
