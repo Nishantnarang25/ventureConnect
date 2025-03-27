@@ -4,7 +4,7 @@ import { db } from "@/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import Homepage from "./components/homepage";
-import WorkFlow from "./components/workflow.tsx"
+import WorkFlow from "./components/workflow"
 
 
 interface FirestoreData {
@@ -36,7 +36,7 @@ export default function Home() {
   if (!session) return <Homepage />;
 
   return (
-    <div className="flex flex-col justify-center items-start min-h-[400px] bg-white">
+    <div className="flex flex-col justify-center items-start min-h-full bg-white">
       <Homepage />
       <WorkFlow/>
     </div>

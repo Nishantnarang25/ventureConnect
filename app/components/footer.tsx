@@ -1,11 +1,12 @@
 'use client';
 
 import React from 'react';
+import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 
 const Footer = () => {
   return (
     <footer className="bg-black/90 text-white py-12">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto max-w-screen-xl px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           {/* Left Section */}
           <div className="mb-6 md:mb-0 flex-1">
@@ -14,7 +15,7 @@ const Footer = () => {
           </div>
 
           {/* Middle and Right Section combined */}
-          <div className="flex justify-end gap-10 items-start flex-1">
+          <nav className="flex justify-end gap-10 items-start flex-1">
             <div>
               <h4 className="font-semibold text-lg">Quick Links</h4>
               <ul className="text-white/60 mt-2 space-y-2 text-sm">
@@ -35,19 +36,19 @@ const Footer = () => {
             {/* Social Media Links */}
             <div className="flex gap-6">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-facebook text-2xl hover:text-white"></i>
+                <Facebook className="text-white/60 hover:text-white w-6 h-6" />
               </a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-twitter text-2xl hover:text-white"></i>
+                <Twitter className="text-white/60 hover:text-white w-6 h-6" />
               </a>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-linkedin text-2xl hover:text-white"></i>
+                <Linkedin className="text-white/60 hover:text-white w-6 h-6" />
               </a>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-instagram text-2xl hover:text-white"></i>
+                <Instagram className="text-white/60 hover:text-white w-6 h-6" />
               </a>
             </div>
-          </div>
+          </nav>
         </div>
 
         {/* Bottom Copyright Section */}

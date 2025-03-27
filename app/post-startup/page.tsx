@@ -49,9 +49,9 @@ const PostStartup = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-xl border mt-10">
+      <div className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-xl border mt-10 mb-14">
       <h1 className="text-2xl font-bold mb-4">Post Your Startup</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4 text-gray-700">
         <input type="text" name="name" placeholder="Startup Name" value={formData.name} onChange={handleChange} required className="w-full p-2 border rounded" />
         <textarea name="description" placeholder="Description" value={formData.description} onChange={handleChange} required className="w-full p-2 border rounded"></textarea>
         <input type="text" name="industry" placeholder="Industry" value={formData.industry} onChange={handleChange} required className="w-full p-2 border rounded" />

@@ -4,12 +4,12 @@ import { getFirestore, Firestore } from "firebase/firestore";
 
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN!,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID!,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET!,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID!,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID!,
+  apiKey: "AIzaSyC4a9mVpVqOejzCvehdkAEQECqU8Q4mE6s",
+  authDomain: "ventureconnect-172dd.firebaseapp.com",
+  projectId: "ventureconnect-172dd",
+  storageBucket: "ventureconnect-172dd.firebasestorage.app",
+  messagingSenderId: "871568727429",
+  appId: "1:871568727429:web:5c233f21d6491550a3f8ec"
 };
 
 const app = initializeApp(firebaseConfig);

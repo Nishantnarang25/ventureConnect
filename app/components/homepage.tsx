@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -6,33 +8,44 @@ const Homepage = () => {
   const { data: session } = useSession();
 
   return (
-    <section className="w-full flex justify-between items-center px-16 py-16 bg-gray-0">
+    <section className="w-full flex flex-col md:flex-row justify-between items-center px-10 md:px-16 py-20 bg-gray-50">
       {/* Left Section */}
-      <div className="max-w-5xl gap-2">
-        <h1 className="text-6xl font-semibold text-black/90 font-roboto leading-[1.2]">
+      <div className="max-w-2xl text-center md:text-left">
+        <h1 className="text-5xl md:text-6xl font-bold text-black leading-tight">
           Empowering Startups, <br />
-          <span className="text-black/60">Connecting Innovators</span>
+          <span className="text-gray-600">Connecting Innovators</span>
         </h1>
 
-        <p className="text-gray-500 font-roboto max-w-lg mt-3">
-          Join a thriving network of entrepreneurs and investors. Launch, grow, and succeed with VentureConnect.
+        <p className="text-gray-500 text-lg mt-4 leading-relaxed">
+          Join a thriving network of entrepreneurs and investors. 
+          Launch, grow, and succeed with <span className="font-semibold text-black">VentureConnect</span>.
         </p>
 
-        {!session ? (
-          <button className="mt-6 bg-black/90 text-white flex items-center font-roboto gap-4 py-2 px-4 pr-2 rounded-lg transition hover:bg-black/80">
-            Get Started <img src="/arrow.png" alt="Explore" className="w-8 h-8" />
-          </button>
-        ) : (
-          <Link href="/startups">
-            <button className="mt-6 bg-black/90 text-white flex items-center font-roboto gap-4 py-2 px-4 pr-2 rounded-lg transition hover:bg-black/80">
-              Explore Startups <img src="/arrow.png" alt="Explore" className="w-8 h-8" />
+        {/* CTA Button */}
+        <div className="mt-8">
+          {!session ? (
+            <button className="bg-black text-white flex items-center gap-3 px-6 py-3 rounded-lg text-lg font-medium transition hover:bg-gray-800">
+              Get Started 
+              <img src="/arrow.png" alt="Explore" className="w-6 h-6" />
             </button>
-          </Link>
-        )}
+          ) : (
+            <Link href="/startups">
+              <button className="bg-black text-white flex items-center gap-3 px-6 py-3 rounded-lg text-lg font-medium transition hover:bg-gray-800">
+                Explore Startups 
+                <img src="/arrow.png" alt="Explore" className="w-6 h-6" />
+              </button>
+            </Link>
+          )}
+        </div>
       </div>
 
-      <div className="flex justify-end ">
-        <img src="/mainp.png" alt="Startup illustration"  />
+      {/* Right Section - Image */}
+      <div className="mt-10 md:mt-0 md:w-1/2 flex justify-center">
+        <img 
+          src="/mainp.png" 
+          alt="Startup illustration" 
+          className="w-full max-w-lg md:max-w-xl rounded-lg shadow-md"
+        />
       </div>
     </section>
   );

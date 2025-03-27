@@ -53,8 +53,6 @@ const Startups = () => {
     }
 
     try {
-      console.log("Saving startup with ID:", startupId);
-
       await addDoc(collection(db, "saved"), {
         created_at: serverTimestamp(),
         email: session.user.email,
@@ -69,92 +67,79 @@ const Startups = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen p-10">
+    <div className="bg-gray-100 min-h-screen p-10">
       {/* Header Section */}
-      <div className="flex flex-col gap-4 text-center py-10">
-        <h1 className="text-4xl font-semibold text-black/90">Explore Startups & Investment Opportunities</h1>
-        <p className="text-black/60 text-lg max-w-2xl mx-auto">
+      <div className="text-center py-10">
+        <h1 className="text-4xl font-bold text-gray-900">Explore Startups & Investment Opportunities</h1>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-4">
           Discover emerging startups, connect with like-minded investors, and grow your network in the startup ecosystem.
         </p>
+      </div>
 
-        {/* Search Bar */}
-        <div className="relative max-w-lg mx-auto w-full">
-          <input
-            type="text"
-            placeholder="Search startups, industries, investors..."
-            className="w-full py-3 px-5 rounded-lg bg-white text-black/70 placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-black/60 hover:text-black">
-            <i className="fas fa-search text-xl"></i>
-          </button>
-        </div>
+      {/* Search Bar */}
+      <div className="relative max-w-lg mx-auto mb-10">
+        <input
+          type="text"
+          placeholder="Search startups, industries, investors..."
+          className="w-full py-3 px-5 rounded-lg bg-white text-gray-700 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-black">
+          <i className="fas fa-search text-xl"></i>
+        </button>
       </div>
 
       {/* Startup Cards Container */}
-      <div className="flex flex-wrap gap-6 justify-start">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {startups.map((startup) => (
           <div
             key={startup.id}
-            className="flex flex-col items-start bg-white shadow-lg rounded-2xl p-6 border border-gray-200 max-w-2xl w-full transition-all duration-300 hover:shadow-xl"
+            className="bg-white shadow-md rounded-xl p-6 border border-gray-200 hover:shadow-xl transition duration-300"
           >
-            {/* Left Section: User Image & Save Button */}
-            <div className="flex flex-row  items-center mr-4">
-              {session?.user?.image && (
-                <img onClick = {handleSave(session.user.id)}
-                  src="/bookmark.png"
-                  alt="User Profile"
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-              )}
-            
+            {/* Startup Heading */}
+            <h2 className="text-xl font-semibold text-gray-900 mb-2">
+              <Link href={`/startups/${startup.id}`} passHref>
+                {startup.name}
+              </Link>
+            </h2>
+            <p className="text-sm text-gray-500">{startup.industry}</p>
+            <p className="text-gray-700 mt-2 line-clamp-3">{startup.description}</p>
+
+            {/* Funding Info */}
+            <div className="mt-4 flex justify-between items-center">
+              <div className="bg-gray-100 flex flex-row gap-2 items-center justify-center px-4 py-4 rounded-lg text-center">
+                <p className="text-sm text-gray-600">Funding Needed</p>
+                <p className="text-lg font-medium text-green-600">${startup.funding_goal}</p>
+              </div>
+
+              <Link href={`/startups/${startup.id}/invest`} passHref>
+                <button className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-all">
+                  More Info
+                </button>
+              </Link>
             </div>
 
-            {/* Right Section: Startup Info */}
-            <div className="flex-1">
-              {/* Startup Heading */}
-              <h2 className="text-xl font-semibold text-gray-900">
-                <Link href={`/startups/${startup.id}`} passHref>
-                  {startup.name}
-                </Link>
-              </h2>
-              <p className="text-sm text-gray-600 mt-1">{startup.industry}</p>
-              <p className="text-gray-700 mt-2">{startup.description}</p>
-
-              {/* Funding Info */}
-              <div className="flex items-center mt-4">
-                <div className="flex-1 p-4 border border-gray-300 rounded-lg text-center">
-                  <p className="text-sm text-gray-500">Funding Needed</p>
-                  <p className="text-lg font-medium text-green-600">${startup.funding_goal}</p>
-                </div>
-                <div className="ml-4">
-                  <Link href={`/startups/${startup.id}/invest`} passHref>
-                    <button className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-all">
-                      More Info
-                    </button>
-                  </Link>
-                </div>
+            {/* Divider */}
+            <div className="border-t border-gray-300 mt-4 pt-4 flex justify-between items-center text-sm text-gray-600">
+              <div>
+                <p>{startup.email}</p>
+                <a
+                  href={startup.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:underline"
+                >
+                  {startup.website}
+                </a>
               </div>
 
-              {/* Gray Stroke Divider */}
-              <div className="border-t border-gray-300 mt-4 pt-4 flex justify-between items-center text-sm text-gray-600">
-                <div>
-                  <p>{startup.email}</p>
-                  <a
-                    href={startup.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline"
-                  >
-                    {startup.website}
-                  </a>
-                </div>
-
-                <Link href={`/startups/${startup.id}/invest`} passHref>
-                  <button className="bg-gradient-to-r from-yellow-400 to-green-500 text-white px-5 py-2 rounded-lg font-medium hover:opacity-90 transition-all">
-                    Invest Now
-                  </button>
-                </Link>
-              </div>
+              {session?.user && (
+                <button
+                  onClick={() => handleSave(startup.id)}
+                  className="bg-yellow-500 text-white px-4 py-3 rounded-lg font-medium hover:bg-yellow-600 transition-all"
+                >
+                  Save Startup
+                </button>
+              )}
             </div>
           </div>
         ))}

@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { db } from "@/lib/firebase";
@@ -48,21 +49,40 @@ const Dashboard = () => {
   }, [session]);
 
   return (
-    <div>
-      <h1>Welcome to {name}'s Dashboard</h1>
-      <ul>
-        {savedStartups.map((startup) => (
-          <li key={startup.id} className="border p-4 rounded-lg shadow-md">
-            <h2 className="text-xl font-bold">{startup.name}</h2>
-            <p>{startup.description}</p>
-            <p><strong>Industry:</strong> {startup.industry}</p>
-            <p><strong>Funding Goal:</strong> ${startup.funding_goal}</p>
-            <p><strong>Funding Received:</strong> ${startup.funding_receive}</p>
-            <a href={startup.website} target="_blank" className="text-blue-600 underline">Visit Website</a>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <section className="w-full min-h-screen bg-gray-50 px-6 md:px-12 py-10">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold text-black mb-6 text-center">
+          Welcome to <span className="text-gray-600">{name}'s</span> Dashboard
+        </h1>
+
+        {savedStartups.length > 0 ? (
+          <ul className="space-y-6">
+            {savedStartups.map((startup) => (
+              <li key={startup.id} className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                <h2 className="text-2xl font-semibold text-black">{startup.name}</h2>
+                <p className="text-gray-600 mt-2">{startup.description}</p>
+
+                <div className="mt-4 text-gray-700">
+                  <p><strong>Industry:</strong> {startup.industry}</p>
+                  <p><strong>Funding Goal:</strong> ${startup.funding_goal.toLocaleString()}</p>
+                  <p><strong>Funding Received:</strong> ${startup.funding_receive.toLocaleString()}</p>
+                </div>
+
+                <a
+                  href={startup.website}
+                  target="_blank"
+                  className="mt-4 inline-block text-blue-600 font-medium underline transition hover:text-blue-800"
+                >
+                  Visit Website
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-500 text-lg text-center mt-6">No saved startups yet.</p>
+        )}
+      </div>
+    </section>
   );
 };
 
